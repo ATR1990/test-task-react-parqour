@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { BsPencilSquare, BsTrash } from 'react-icons/bs'
+import { Button } from 'react-bootstrap'
 
 import { useDeleteTaskMutation } from '../redux/api/tasks.js'
+import { DataModal } from './DataModal.jsx'
 
 // eslint-disable-next-line react/prop-types
 export const TableRow = ({ tasks }) => {
+  const [show, setShow] = useState(false)
+  const [id, setId] = useState('')
   const [list, setList] = useState(tasks)
 
   useEffect(() => {
@@ -40,43 +44,49 @@ export const TableRow = ({ tasks }) => {
     setList(copyListItems)
   }
 
-  /*const updateTask = index => () => {
-    console.log('updateTask', index)
-  }*/
+  const handleShow = i => () => {
+    setShow(true)
+    setId(i)
+  }
 
   return (
-    <tbody onDragEnd={drop}>
-      {list?.map((task, index) => (
-        <tr
-          className="cursor"
-          key={task.id}
-          draggable
-          onDragStart={dragStart(index)}
-          onDragEnter={dragEnter(index)}
-        >
-          <td>{task.title}</td>
-          <td>{task.description}</td>
-          <td>{task.status}</td>
-          <td>
-            <div className="d-flex justify-content-around">
-              <button
-                type="button"
-                className="btn btn-outline-warning"
-                // onClick={updateTask(index)}
-              >
-                <BsPencilSquare></BsPencilSquare>
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-danger"
-                onClick={() => deleteTask({ id: task.id })}
-              >
-                <BsTrash></BsTrash>
-              </button>
-            </div>
-          </td>
-        </tr>
-      ))}
-    </tbody>
+    <>
+      <tbody onDragEnd={drop}>
+        {list?.map((task, index) => (
+          <tr
+            className="cursor"
+            key={task?.id}
+            draggable
+            onDragStart={dragStart(index)}
+            onDragEnter={dragEnter(index)}
+          >
+            <td>{task?.title}</td>
+            <td>{task?.description}</td>
+            <td>{task?.status}</td>
+            <td>
+              <div className="d-flex justify-content-around">
+                <Button variant="outline-warning" onClick={handleShow(task?.id)}>
+                  <BsPencilSquare></BsPencilSquare>
+                </Button>
+
+                <Button
+                  variant="outline-danger"
+                  onClick={() => deleteTask({ id: task?.id })}
+                >
+                  <BsTrash></BsTrash>
+                </Button>
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+
+      {show && <DataModal
+        show={show}
+        setShow={setShow}
+        isEdit={true}
+        id={id}
+      />}
+    </>
   )
 }

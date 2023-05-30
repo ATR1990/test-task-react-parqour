@@ -1,10 +1,8 @@
-import {
-  useGetTasksQuery,
-  // useCreateTaskMutation,
-  // useUpdateTaskMutation,
-} from '../redux/api/tasks.js'
+import { Spinner } from 'react-bootstrap'
 
 import { TableRow } from './TableRow.jsx'
+import { useGetTasksQuery } from '../redux/api/tasks.js'
+
 
 export const TableBody = () => {
   const {
@@ -14,8 +12,6 @@ export const TableBody = () => {
     isError,
     error
   } = useGetTasksQuery()
-  // const [createTask] = useCreateTaskMutation()
-  // const [updateTask] = useUpdateTaskMutation()
 
   let content
 
@@ -24,7 +20,7 @@ export const TableBody = () => {
       <tbody>
         <tr>
           <td colSpan="4" className="text-center">
-            Loading...
+            <Spinner animation="border" />
           </td>
         </tr>
       </tbody>

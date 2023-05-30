@@ -1,9 +1,11 @@
+import { Table } from 'react-bootstrap'
+
 import { TableHead } from './TableHead.jsx'
 import { TableBody } from './TableBody.jsx'
 
-export const Table = () => (
-  <table className="table table-bordered table-hover w-50">
+export const DataTable = () => (
+  <Table className="w-50" bordered hover>
     <TableHead />
     <TableBody />
-  </table>
+  </Table>
 )
