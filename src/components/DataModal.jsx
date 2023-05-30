@@ -23,9 +23,9 @@ export const DataModal = props => {
   const [status, setStatus] = useState('')
 
   useEffect(() => {
-    setTitle(taskById?.title)
-    setDescription(taskById?.description)
-    setStatus(taskById?.status)
+    taskById && setTitle(taskById?.title)
+    taskById && setDescription(taskById?.description)
+    taskById && setStatus(taskById?.status)
   }, [
     taskById?.title,
     taskById?.description,
