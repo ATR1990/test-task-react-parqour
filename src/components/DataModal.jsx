@@ -20,7 +20,7 @@ export const DataModal = props => {
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState('unassigned')
 
   useEffect(() => {
     taskById && setTitle(taskById?.title)
@@ -43,6 +43,12 @@ export const DataModal = props => {
     isEdit
       ? updateTask({ title, description, status, id })
       : createTask({ title, description, status })
+
+    handleClose()
+
+    setTitle('')
+    setDescription('')
+    setStatus('unassigned')
   }
 
   return (

@@ -62,7 +62,7 @@ export const TableRow = ({ tasks }) => {
           >
             <td>{task?.title}</td>
             <td>{task?.description}</td>
-            <td>{task?.status}</td>
+            <td className="text-capitalize">{task?.status}</td>
             <td>
               <div className="d-flex justify-content-around">
                 <Button variant="outline-warning" onClick={handleShow(task?.id)}>
