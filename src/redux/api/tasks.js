@@ -18,6 +18,7 @@ export const tasksApi = createApi({
             query: (id) => ({
                 url: `/${id}`
             }),
+            providesTags: ['Tasks']
         }),
         createTask: builder.mutation({
             query: task => ({
